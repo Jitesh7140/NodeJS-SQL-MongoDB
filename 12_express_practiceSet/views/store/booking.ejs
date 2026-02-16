@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+    <%- include('../partials/nav') %>
+
+    <main class="max-w-7xl mx-auto px-8 py-10">
+        <h1 class="text-3xl font-bold mb-8">Your Bookings</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Home" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h2 class="font-bold text-lg">Lakefront Villa</h2>
+                        <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-semibold">Confirmed</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">Nainital, Uttarakhand</p>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="text-sm font-medium"><span class="text-gray-500">Dates:</span> 15 Feb - 20 Feb</p>
+                        <p class="text-sm font-medium mt-1"><span class="text-gray-500">Price Paid:</span> ₹12,500</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2" alt="Home" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h2 class="font-bold text-lg">Mountain Cabin</h2>
+                        <span class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-semibold">Upcoming</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">Manali, Himachal Pradesh</p>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="text-sm font-medium"><span class="text-gray-500">Dates:</span> 10 March - 12 March</p>
+                        <p class="text-sm font-medium mt-1"><span class="text-gray-500">Price Paid:</span> ₹8,000</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

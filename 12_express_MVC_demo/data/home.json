@@ -1,0 +1,23 @@
+[
+    {
+        "title": "12",
+        "type": "Apartment",
+        "price": "12",
+        "location": "12",
+        "image": "https://media.istockphoto.com/id/2170833139/photo/northern-california-home-exterior.jpg?s=612x612&w=0&k=20&c=T-kobb62U72u31VWLiwN7CB0HwrXVmaBrnZL7Bzjn8s="
+    },
+    {
+        "title": "12",
+        "type": "Apartment",
+        "price": "12",
+        "location": "1212",
+        "image": "https://nasd.com"
+    },
+    {
+        "title": "jitesh",
+        "type": "House",
+        "price": "32",
+        "location": "na",
+        "image": "https://media.istockphoto.com/id/2170833139/photo/northern-california-home-exterior.jpg?s=612x612&w=0&k=20&c=T-kobb62U72u31VWLiwN7CB0HwrXVmaBrnZL7Bzjn8s="
+    }
+]

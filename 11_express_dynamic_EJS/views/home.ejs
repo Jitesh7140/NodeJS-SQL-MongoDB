@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>New Airbnb</title>
+  <link href="/output.css" rel="stylesheet">
+</head>
+
+<body class="m-0 h-[50vh] flex items-center justify-center font-sans bg-gray-100">
+
+  <div class="bg-white p-10 rounded-xl text-center shadow-lg">
+
+    <h1 class="mb-4 text-2xl font-semibold text-gray-900">
+      Welcome to New Airbnb
+    </h1>
+
+    <%  HomeArray.forEach(home=>{ %>
+      <p class="mb-6 text-sm text-gray-600">
+      <strong class="text-yellow-300" >Home: </strong>  <%= home.homeName %>
+      </p>
+      <% }) %>
+      
+        <a href="/host/add-home"
+          class="inline-block bg-[#ff385c] text-white px-7 py-3 rounded-md font-bold hover:bg-[#e03150] transition">
+          Add Home
+        </a>
+
+  </div>
+
+</body>
+
+</html>

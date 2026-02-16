@@ -1,0 +1,22 @@
+{
+  "name": "node_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1st_understand_request.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "chal-ja-bhai": "nodemon 10th_response_express",
+    "start": "nodemon 10th_response_express"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "body-parser": "^2.2.2",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11",
+    "tailwind": "^4.0.0",
+    "tailwindcss": "^4.1.18"
+  }
+}
