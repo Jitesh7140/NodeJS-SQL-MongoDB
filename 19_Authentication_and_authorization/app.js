@@ -1,11 +1,11 @@
 //core Modules
 const express = require('express'); 
-const {mongoose} = require('mongoose')
+const mongoose= require('mongoose')
 const { error } = require('console');
 const session = require('express-session') 
 const MongoDBStore  = require('connect-mongodb-session')(session);
 const mongo_url = 'mongodb+srv://root:root@newmongodb.mliecuf.mongodb.net/?appName=NewMongoDB';
-
+                           
 //local Modules
 const {StoreRoute} = require('./routes/storeRoute')
 const {hostRoute} = require('./routes/hostRoute')

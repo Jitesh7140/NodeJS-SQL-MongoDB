@@ -4,29 +4,32 @@ const favourite = require('../model/favou');
 const { Double } = require('mongodb');
 
 exports.indexPage = (req, res, next) => {
+    console.log("Session User:", req.session.user);
+    console.log("Session Login:", req.session.isLogin);
     Home.find().then((HomeData) => {
-        res.render("store/index", {  isLogin:req.isLogin,HomeData: HomeData  , isLogin:req.isLogin});
-    }) 
+        res.render("store/index", { isLogin: req.isLogin, HomeData: HomeData, 
+            isLogin: req.isLogin, user: req.session.user });
+    })
 }
 
-exports.getHome = (req, res, next) => { 
-    if(!req.isLogin){
+exports.getHome = (req, res, next) => {
+    if (!req.isLogin) {
         return res.redirect('/login')
     }
     Home.find().then((HomeData) => {
-        res.render("store/home-list",  {isLogin:req.isLogin, HomeData: HomeData ,isLogin:req.isLogin });
-    }) 
+        res.render("store/home-list", { isLogin: req.isLogin, HomeData: HomeData, isLogin: req.isLogin });
+    })
 }
 
 exports.bookings = (req, res, next) => {
-      if(!req.isLogin){
+    if (!req.isLogin) {
         return res.redirect('/login')
     }
-    res.render("store/booking", {isLogin:req.isLogin});
+    res.render("store/booking", { isLogin: req.isLogin });
 }
 
 exports.getfavorites = (req, res, next) => {
-  if(!req.isLogin){
+    if (!req.isLogin) {
         return res.redirect('/login')
     }
 
@@ -39,17 +42,17 @@ exports.getfavorites = (req, res, next) => {
                 return newFavArrya.includes(home._id.toString())
             })
 
-            res.render("store/fav-list", { isLogin:req.isLogin,favData: favHomeData });
+            res.render("store/fav-list", { isLogin: req.isLogin, favData: favHomeData });
         })
     })
 }
 
 exports.Postfavorites = (req, res, next) => {
-      if(!req.isLogin){
+    if (!req.isLogin) {
         return res.redirect('/login')
     }
-    const favid = { favID: req.body.favItem } 
-    
+    const favid = { favID: req.body.favItem }
+
     favourite.findOne({ favID: favid.favID }).then((existingFav) => {
         if (existingFav) {
             console.log('Home is already in favorites');
@@ -69,7 +72,7 @@ exports.Postfavorites = (req, res, next) => {
     })
 }
 exports.RemovieFavorites = (req, res, next) => {
-  if(!req.isLogin){
+    if (!req.isLogin) {
         return res.redirect('/login')
     }
     favourite.deleteOne({ favID: req.params.favids }).then(() => {
@@ -79,13 +82,13 @@ exports.RemovieFavorites = (req, res, next) => {
 }
 
 exports.getHomeDetails = (req, res, next) => {
-      if(!req.isLogin){
+    if (!req.isLogin) {
         return res.redirect('/login')
     }
     // console.log(req.params.homeID)
     Home.findById(req.params.homeID).then((HomeData) => {
         console.log('home data in controller:', HomeData)
-        res.render("store/home-details", { isLogin:req.isLogin,HomeData: HomeData });
+        res.render("store/home-details", { isLogin: req.isLogin, HomeData: HomeData });
     })
 
 

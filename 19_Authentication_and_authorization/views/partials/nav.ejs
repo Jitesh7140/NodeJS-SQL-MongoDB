@@ -8,30 +8,44 @@
 
     <a href="/" class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
       Airbnb
+      <% console.log('user is:', user) %>
     </a>
 
-    <%if(isLogin) {%>
+<% if (isLogin && user) { %>
 
-    <a href="/home-list" class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
+  <% if (user.role === 'guest') { %>
+
+    <a href="/home-list"
+      class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
       Home List
     </a>
-    <a href="/bookings" class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
+
+    <a href="/bookings"
+      class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
       Bookings
     </a>
 
-    <a href="/favorites" class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
+    <a href="/favorites"
+      class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
       Favorites
     </a>
 
-    <a href="/host/host-home" class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
-      Host-Home
+  <% } else if (user.role === 'host') { %>
+
+    <a href="/host/host-home"
+      class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
+      Host Home
     </a>
 
-    <a href="/host/AddHome" class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-gray-700">
+    <a href="/host/AddHome"
+      class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-gray-700">
       Add Home
     </a>
 
-    <% } %>
+  <% } %>
+
+<% } %>
+
 
 
     <div class="flex items-center ml-2 gap-2 border-l pl-3">
@@ -39,13 +53,16 @@
       <a href="/login" class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-[#ff385c]">
         LogIn
       </a>
+      <a href="/signup" class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-[#ff385c]">
+        Sign Up
+      </a>
       <% } else { %>
-       
-        <form action="/logout" method="post">
-          <input type="hidden" name="logout" value="null">
-          <button class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-[#ff385c]" type="submit">LogOut</button> 
-        </form> 
-     
+
+      <form action="/logout" method="post">
+        <input type="hidden" name="logout" value="null">
+        <button class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-[#ff385c]" type="submit">LogOut</button>
+      </form>
+
       <% } %>
 
 

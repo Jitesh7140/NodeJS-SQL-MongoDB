@@ -3,7 +3,7 @@ const mongodb = require('mongodb');
 
 const MongoClient = mongodb.MongoClient;
 
-const mongo_url = 'mongodb+srv://root:root@newmongodb.mliecuf.mongodb.net/?appName=NewMongoDB';
+const mongo_url = 'databse url';
 
 let _db ;
 

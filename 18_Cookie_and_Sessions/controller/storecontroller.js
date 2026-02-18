@@ -5,7 +5,7 @@ const { Double } = require('mongodb');
 
 exports.indexPage = (req, res, next) => {
     Home.find().then((HomeData) => {
-        res.render("store/index", {  isLogin:req.isLogin,HomeData: HomeData  , isLogin:req.isLogin});
+        res.render("store/index", {  isLogin:req.isLogin,HomeData: HomeData  , isLogin:req.isLogin , user:req.session.user});
     }) 
 }
 
@@ -14,7 +14,7 @@ exports.getHome = (req, res, next) => {
         return res.redirect('/login')
     }
     Home.find().then((HomeData) => {
-        res.render("store/home-list",  {isLogin:req.isLogin, HomeData: HomeData ,isLogin:req.isLogin });
+        res.render("store/home-list",  {isLogin:req.isLogin, HomeData: HomeData ,isLogin:req.isLogin , user:req.session.user });
     }) 
 }
 
@@ -22,7 +22,7 @@ exports.bookings = (req, res, next) => {
       if(!req.isLogin){
         return res.redirect('/login')
     }
-    res.render("store/booking", {isLogin:req.isLogin});
+    res.render("store/booking", {isLogin:req.isLogin , user:req.session.user});
 }
 
 exports.getfavorites = (req, res, next) => {
@@ -39,7 +39,7 @@ exports.getfavorites = (req, res, next) => {
                 return newFavArrya.includes(home._id.toString())
             })
 
-            res.render("store/fav-list", { isLogin:req.isLogin,favData: favHomeData });
+            res.render("store/fav-list", { isLogin:req.isLogin,favData: favHomeData , user:req.session.user });
         })
     })
 }
@@ -85,7 +85,7 @@ exports.getHomeDetails = (req, res, next) => {
     // console.log(req.params.homeID)
     Home.findById(req.params.homeID).then((HomeData) => {
         console.log('home data in controller:', HomeData)
-        res.render("store/home-details", { isLogin:req.isLogin,HomeData: HomeData });
+        res.render("store/home-details", { isLogin:req.isLogin,HomeData: HomeData , user:req.session.user });
     })
 
 

@@ -1,6 +1,6 @@
 
 exports.auth = (req ,res , next)=>{  
-     res.render("auth/login", {isLogin:false} );
+     res.render("auth/login", {isLogin:false , user:{}} );
 
 }
 
@@ -10,7 +10,7 @@ exports.authPost = (req ,res , next)=>{
   req.session.isLogin = true;
     // res.cookie('isLogin' , true)
     req.isLogin =true;
-    res.redirect("/"   );
+    res.redirect("/" ,{user:{}}   );
 
 }
  

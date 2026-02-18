@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up airbnb</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+ <%- include('../partials/nav') %>
+
+
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+  <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
+
+    <h2 class="text-2xl font-semibold text-center mb-6">
+      Create your account
+    </h2>
+
+   <form action="/signup" method="POST" class="space-y-5">
+ <% if (errors && errors.length > 0) { %>
+  <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
+    <h4>error are hear</h4>
+    <ul class="list-disc list-inside text-sm">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+  <!-- Username -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Username</label>
+    <input type="text" name="username" required
+      value="<%= oldInput ? oldInput.username : '' %>"
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none"
+      placeholder="Enter username">
+  </div>
+
+  <!-- Email -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Email</label>
+    <input type="email" name="email" required
+      value="<%= oldInput ? oldInput.email : '' %>"
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none"
+      placeholder="Enter email">
+  </div>
+
+  <!-- Role Dropdown -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Register As</label>
+    <select name="role" required
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none bg-white">
+
+      <option value="">Select Role</option>
+
+      <option value="guest"
+        <%= oldInput && oldInput.role === "guest" ? "selected" : "" %>>
+        Guest
+      </option>
+
+      <option value="host"
+        <%= oldInput && oldInput.role === "host" ? "selected" : "" %>>
+        Host
+      </option>
+
+    </select>
+  </div>
+
+  <!-- Password -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Password</label>
+    <input type="password" name="password" required
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none"
+      placeholder="Enter password">
+  </div>
+
+  <!-- Confirm Password -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+    <input type="password" name="confirmPassword" required
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none"
+      placeholder="Confirm Your password">
+  </div>
+
+  <!-- Terms Checkbox -->
+  <div class="flex items-start">
+    <input type="checkbox" name="terms"
+      <%= oldInput && oldInput.terms ? "checked" : "" %>
+      class="mt-1 h-4 w-4 text-rose-500 border-gray-300 rounded">
+    <label class="ml-2 text-sm text-gray-600">
+      I agree to the 
+      <a href="/terms" class="text-rose-500 hover:underline font-medium">
+        Terms & Conditions
+      </a>
+    </label>
+  </div>
+
+  <!-- Submit -->
+  <button type="submit"
+    class="w-full bg-rose-500 text-white py-2.5 rounded-lg font-medium hover:bg-rose-600 transition duration-200">
+    Sign Up
+  </button>
+
+</form>
+
+
+    <p class="text-center text-sm text-gray-600 mt-6">
+      Already have an account?
+      <a href="/login" class="text-rose-500 hover:underline font-medium">
+        Login
+      </a>
+    </p>
+
+  </div>
+</div>
+
+
+
+</body>
+
+</html>
