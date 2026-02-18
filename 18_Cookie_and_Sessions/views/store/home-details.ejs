@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>HomeData Details</title>
+</head>
+
+<body class="bg-white text-gray-900">
+
+  <%- include('../partials/nav') %>
+ 
+  <% console.log(HomeData) %>
+
+  <% if ('html: ' ,HomeData) { %>
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+
+    <div class="mb-6 flex justify-between items-start">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"><%= HomeData.title %></h1>
+        <div class="mt-2 flex items-center gap-4 text-sm font-medium">
+          <span class="underline cursor-pointer"><%= HomeData.location %></span>
+        </div>
+      </div>
+
+      <button class="flex items-center gap-2 underline font-semibold hover:bg-gray-100 p-2 rounded-lg transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+        </svg>
+        Save
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      <div class="relative rounded-2xl overflow-hidden shadow-lg h-[400px] md:h-[500px]">
+        <img src="<%= HomeData.image %>" class="w-full h-full object-cover hover:scale-105 transition duration-500 cursor-pointer" alt="Main image">
+
+        <div class="absolute top-4 right-4 md:hidden">
+          <button class="bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="sticky top-8 border rounded-2xl p-6 shadow-2xl bg-white">
+          <div class="flex justify-between items-center mb-6">
+            <div class="text-gray-900">
+              <span class="text-2xl font-bold">$<%= HomeData.price %></span>
+              <span class="text-gray-500"> / night</span>
+            </div>
+            <div class="text-sm font-semibold">⭐ 4.95</div>
+          </div>
+
+          <div class="space-y-3">
+            <button class="w-full bg-[#FF385C] text-white py-3.5 rounded-lg font-bold text-lg hover:bg-[#E31C5F] transition active:scale-95 shadow-lg">
+              Reserve <%= HomeData.type %>
+            </button>
+
+            <form action="/favorites" method="POST">
+              <input type="hidden" name="favItem" value=<%= HomeData._id %>>
+
+              <button type="submit" class="w-full border-2 border-gray-900 text-gray-900 py-3 rounded-lg font-bold text-lg hover:bg-gray-50 transition active:scale-95 flex items-center justify-center gap-2">
+                Add to Favorites
+              </button>
+              
+            </form>
+          </div>
+
+          <p class="text-center text-xs text-gray-500 mt-4">You won't be charged yet</p>
+
+
+        </div>
+      </div>
+    </div>
+  </main>
+  <% } else { %>
+  <div class="h-screen flex flex-col items-center justify-center">
+    <h1 class="text-4xl font-bold text-gray-400 mb-4 italic">HomeData details not found!</h1>
+    <a href="/" class="bg-black text-white px-6 py-2 rounded-full">Go Back HomeData</a>
+  </div>
+  <% } %>
+
+</body>
+
+</html>
