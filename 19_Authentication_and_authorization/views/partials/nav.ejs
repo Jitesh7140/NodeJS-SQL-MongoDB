@@ -1,76 +1,65 @@
-<nav class="border-b-[1px] py-4 px-8 flex justify-between items-center sticky top-0 bg-white z-50">
-  <a href="/" class="text-[#ff385c] font-bold text-3xl cursor-pointer">
-    airbnb
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<nav class="border-b border-gray-200 py-3 px-6 md:px-12 flex justify-between items-center sticky top-0 bg-white z-50 shadow-sm font-['Inter']">
+
+  <a href="/" class="flex items-center gap-1 text-[#ff385c] hover:opacity-90 transition-all">
+    <svg viewBox="0 0 32 32" class="h-8 w-8 fill-current" aria-hidden="true">
+      <path d="M16 1c2.008 0 3.463.963 4.751 3.269l.533 1.025c1.954 3.83 6.114 12.54 7.1 14.836l.145.353c.667 1.591.91 2.472.96 3.396l.01.415.001.228c0 4.062-2.877 6.478-6.357 6.478-2.224 0-4.556-1.258-6.709-3.386l-.257-.26-.172-.179h-.011l-.176.185c-2.044 2.1-4.392 3.42-6.65 3.636l-.312.008c-3.48 0-6.358-2.416-6.358-6.478 0-1.12.247-2.144.755-3.468l.144-.352c.987-2.296 5.147-11.006 7.101-14.836l.533-1.025C12.537 1.963 13.992 1 16 1z"></path>
+    </svg>
+    <span class="hidden md:block font-bold text-xl tracking-tight">airbnb</span>
   </a>
 
-  <div class="flex items-center gap-1 border p-2 rounded-full shadow-sm hover:shadow-md transition border-gray-300">
-
-
-    <a href="/" class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
-      Airbnb
-      <% console.log('user is:', user) %>
-    </a>
-
-<% if (isLogin && user) { %>
-
-  <% if (user.role === 'guest') { %>
-
-    <a href="/home-list"
-      class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
-      Home List
-    </a>
-
-    <a href="/bookings"
-      class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
-      Bookings
-    </a>
-
-    <a href="/favorites"
-      class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
-      Favorites
-    </a>
-
-  <% } else if (user.role === 'host') { %>
-
-    <a href="/host/host-home"
-      class="px-3 py-2 rounded-full font-semibold hover:bg-gray-100 transition text-sm text-gray-700">
-      Host Home
-    </a>
-
-    <a href="/host/AddHome"
-      class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-gray-700">
-      Add Home
-    </a>
-
-  <% } %>
-
-<% } %>
-
-
-
-    <div class="flex items-center ml-2 gap-2 border-l pl-3">
-      <%if(!isLogin) {%>
-      <a href="/login" class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-[#ff385c]">
-        LogIn
-      </a>
-      <a href="/signup" class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-[#ff385c]">
-        Sign Up
-      </a>
-      <% } else { %>
-
-      <form action="/logout" method="post">
-        <input type="hidden" name="logout" value="null">
-        <button class="px-3 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm text-[#ff385c]" type="submit">LogOut</button>
-      </form>
-
+  <div class="flex items-center gap-1 md:gap-4">
+    <% if (isLogin && user) { %>
+      
+      <% if (user.role === 'guest') { %>
+        <a href="/home-list" class="px-4 py-2 rounded-full hover:bg-gray-100 text-sm font-semibold text-gray-700 transition-colors">
+          Home List
+        </a>
+        <a href="/bookings" class="px-4 py-2 rounded-full hover:bg-gray-100 text-sm font-semibold text-gray-700 transition-colors">
+          Bookings
+        </a>
+        <a href="/favorites" class="px-4 py-2 rounded-full hover:bg-gray-100 text-sm font-semibold text-gray-700 transition-colors">
+          Favorites
+        </a>
       <% } %>
 
+      <% if (user.role === 'host') { %>
+        <a href="/host/host-home" class="px-4 py-2 rounded-full hover:bg-gray-100 text-sm font-semibold text-gray-700 transition-colors">
+          Host Home
+        </a>
+        <a href="/host/AddHome" class="px-4 py-2 rounded-full hover:bg-gray-100 text-sm font-semibold text-gray-700 transition-colors border border-gray-200 shadow-sm ml-2">
+          Add Home
+        </a>
+      <% } %>
 
-      <div class="bg-gray-500 text-white rounded-full p-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-          <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
-        </svg>
-      </div>
-    </div>
+    <% } %>
   </div>
+
+  <div class="flex items-center gap-4">
+    <% if (!isLogin) { %>
+      <a href="/login" class="text-sm font-semibold text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-full transition-colors">
+        Log in
+      </a>
+      <a href="/signup" class="text-sm font-semibold bg-[#ff385c] text-white px-5 py-2.5 rounded-full hover:bg-[#d92142] transition-all shadow-sm">
+        Sign up
+      </a>
+    <% } else { %>
+      <div class="flex items-center gap-4 bg-gray-50 px-4 py-1.5 rounded-full border border-gray-100">
+        <span class="text-sm font-bold text-gray-800 flex items-center gap-2">
+          <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+          <%= user.username %>
+        </span>
+        
+        <div class="w-[1px] h-4 bg-gray-300"></div>
+
+        <form action="/logout" method="POST" class="inline">
+          <button type="submit" class="text-sm font-bold text-red-500 hover:text-red-700 transition-colors">
+            Logout
+          </button>
+        </form>
+      </div>
+    <% } %>
+  </div>
+
 </nav>

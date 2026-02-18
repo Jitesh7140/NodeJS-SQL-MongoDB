@@ -10,12 +10,12 @@ exports.AddHomeGet = (req, res, next) => {
 
 exports.SetHome = (req, res, next) => {
     const { title, type, price, location, image } = req.body;
-    const home = new Home({title, type, price, location, image}); 
+    const home = new Home({title, type, price, location, image});  
 
     home.save().then(()=>{
         console.log('save success')
-    });
-
+    }); 
+        
     res.render("host/HomeAdded", { data: req.body , isLogin:req.isLogin , user:req.session.user });
 }
 

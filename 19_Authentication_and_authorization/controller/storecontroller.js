@@ -1,14 +1,13 @@
 
 const Home = require('../model/home')
-const favourite = require('../model/favou');
+const User = require('../model/user');
 const { Double } = require('mongodb');
 
 exports.indexPage = (req, res, next) => {
-    console.log("Session User:", req.session.user);
-    console.log("Session Login:", req.session.isLogin);
+    // console.log('session in index page: ', req.user);
+    // console.log('session in isLogin page: ', req.isLogin);
     Home.find().then((HomeData) => {
-        res.render("store/index", { isLogin: req.isLogin, HomeData: HomeData, 
-            isLogin: req.isLogin, user: req.session.user });
+        res.render("store/index", { HomeData: HomeData, isLogin: req.isLogin, user: req.user });
     })
 }
 
@@ -17,7 +16,7 @@ exports.getHome = (req, res, next) => {
         return res.redirect('/login')
     }
     Home.find().then((HomeData) => {
-        res.render("store/home-list", { isLogin: req.isLogin, HomeData: HomeData, isLogin: req.isLogin });
+        res.render("store/home-list", { user: req.user, isLogin: req.isLogin, HomeData: HomeData });
     })
 }
 
@@ -25,70 +24,61 @@ exports.bookings = (req, res, next) => {
     if (!req.isLogin) {
         return res.redirect('/login')
     }
-    res.render("store/booking", { isLogin: req.isLogin });
+    res.render("store/booking", { isLogin: req.isLogin, user: req.user });
 }
 
-exports.getfavorites = (req, res, next) => {
+exports.getfavorites = async (req, res, next) => {
     if (!req.isLogin) {
         return res.redirect('/login')
     }
 
-    favourite.find().then((favhomes) => {
+    const userID = req.user._id;
+    const user = await User.findById(userID).populate('favorites')
 
-        const newFavArrya = favhomes.map(homes => homes.favID.toString())
+    res.render("store/fav-list", { isLogin: req.isLogin, favData: user.favorites, user: req.user });
 
-        Home.find().then((HomeData) => {
-            const favHomeData = HomeData.filter((home) => {
-                return newFavArrya.includes(home._id.toString())
-            })
-
-            res.render("store/fav-list", { isLogin: req.isLogin, favData: favHomeData });
-        })
-    })
 }
-
-exports.Postfavorites = (req, res, next) => {
+exports.Postfavorites = async (req, res, next) => {
     if (!req.isLogin) {
         return res.redirect('/login')
     }
-    const favid = { favID: req.body.favItem }
+    const favid = { favID: req.body.favItem };
+    const userID = req.session.user._id;
+    const user = await User.findById(userID);
+    if (user.favorites.includes(favid.favID)) {
+        console.log('Home is already in favorites');
+        return res.redirect('/favorites');
+    }
+    user.favorites.push(favid.favID);
+    await user.save();
+    console.log('Successfully added favorite home for user:', user.username);
+    res.redirect('/favorites');
 
-    favourite.findOne({ favID: favid.favID }).then((existingFav) => {
-        if (existingFav) {
-            console.log('Home is already in favorites');
-            return res.redirect('/favorites');
-        } else {
-            const favhome = new favourite(favid);
-            favhome.save().then(() => {
-                console.log('Home added to favorites successfully');
-                res.redirect('/favorites');
-            }
-            ).catch((err) => {
-                console.log('Error adding home to favorites:', err);
-                res.redirect('/favorites');
-            });
-        }
-
-    })
 }
-exports.RemovieFavorites = (req, res, next) => {
+exports.RemovieFavorites = async (req, res, next) => {
     if (!req.isLogin) {
         return res.redirect('/login')
     }
-    favourite.deleteOne({ favID: req.params.favids }).then(() => {
-        console.log('delete fav sucess')
-        res.redirect('/favorites')
-    })
+    const userID = req.session.user._id;
+    const favID = req.params.favids;
+    const user = await User.findById(userID)
+    if (user.favorites.includes(favID)) {
+        user.favorites.pull(favID);
+        await user.save();
+    }
+    console.log('delete fav sucess')
+    res.redirect('/favorites')
+
 }
 
 exports.getHomeDetails = (req, res, next) => {
     if (!req.isLogin) {
         return res.redirect('/login')
     }
-    // console.log(req.params.homeID)
+
     Home.findById(req.params.homeID).then((HomeData) => {
         console.log('home data in controller:', HomeData)
-        res.render("store/home-details", { isLogin: req.isLogin, HomeData: HomeData });
+        res.render("store/home-details", { isLogin: req.isLogin, HomeData: HomeData, user: req.user, });
     })
 
 

@@ -5,7 +5,7 @@ const favourite = require('../model/favou')
 
 exports.AddHomeGet = (req, res, next) => {
     console.log('isLogin in add home get' , req.isLogin)
-    res.render("host/edit-home", { editing: false ,isLogin:req.isLogin });
+    res.render("host/edit-home", { editing: false ,isLogin:req.isLogin , user:req.user});
 }
 
 exports.SetHome = (req, res, next) => {
@@ -14,11 +14,10 @@ exports.SetHome = (req, res, next) => {
 
     home.save().then(()=>{
         console.log('save success')
-    });
-
-    res.render("host/HomeAdded", { data: req.body , isLogin:req.isLogin });
+    }); 
+    
+    res.render("host/HomeAdded", { data: req.body , isLogin:req.isLogin , user:req.user});
 }
-
 
 
 exports.GetEditHome = (req, res, next) => {
@@ -28,7 +27,7 @@ exports.GetEditHome = (req, res, next) => {
         if (!HomeData) {
             res.redirect('/')
         } else {
-            res.render("host/edit-home", {isLogin:req.isLogin, home: HomeData, editing: req.query.editing === 'true' });
+            res.render("host/edit-home", {user:req.user, isLogin:req.isLogin, home: HomeData, editing: req.query.editing === 'true' });
         }
     })
 }
@@ -71,7 +70,7 @@ exports.PostDeleteHome = (req, res, next) => {
 
 exports.HostHomeList = (req, res, next) => {
     Home.find().then((HomeData)=>{ 
-        res.render("host/host-home-list", { isLogin:req.isLogin,HomeData: HomeData });
+        res.render("host/host-home-list", { isLogin:req.isLogin,HomeData: HomeData , user:req.user});
     });
 }
 

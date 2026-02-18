@@ -23,7 +23,7 @@ app.use(hostRoute)
 
 app.use(ErrorController.PageNotFound)
 
-const mongo_url = 'mongodb+srv://root:root@newmongodb.mliecuf.mongodb.net/?appName=NewMongoDB';
+const mongo_url = 'databseurl';
  
 
 

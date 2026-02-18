@@ -4,8 +4,10 @@ const favourite = require('../model/favou');
 const { Double } = require('mongodb');
 
 exports.indexPage = (req, res, next) => {
+    console.log('session in index page: ', req.user);
+    console.log('session in isLogin page: ', req.isLogin);
     Home.find().then((HomeData) => {
-        res.render("store/index", {  isLogin:req.isLogin,HomeData: HomeData  , isLogin:req.isLogin , user:req.session.user});
+        res.render("store/index", {  HomeData: HomeData  , isLogin:req.isLogin , user:req.user});
     }) 
 }
 

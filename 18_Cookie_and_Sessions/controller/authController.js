@@ -7,10 +7,10 @@ exports.auth = (req ,res , next)=>{
  
 
 exports.authPost = (req ,res , next)=>{ 
-  req.session.isLogin = true;
+    req.session.isLogin = {true:true};
     // res.cookie('isLogin' , true)
-    req.isLogin =true;
-    res.redirect("/" ,{user:{}}   );
+    // req.isLogin =true;
+    res.redirect("/"   );
 
 }
  

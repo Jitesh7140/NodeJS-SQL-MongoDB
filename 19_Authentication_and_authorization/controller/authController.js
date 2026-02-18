@@ -8,25 +8,43 @@ exports.Loginauth = (req, res, next) => {
 }
 
 exports.LoginauthPost = async (req, res, next) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body;  
+    //  const user = {key: "value"};
     const user = await User.findOne({ email: email });
-
     if (!user) {
-        return res.status(401).render("auth/login", { isLogin: false, errorMessage: "Invalid email", user: {} });
+        return res.status(401).render("auth/login", {
+            isLogin: false,
+            errorMessage: "Invalid email", 
+        });
     }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-        return res.status(401).render("auth/login", { isLogin: false, errorMessage: "Invalid password", user: {} });
-    }
+        return res.status(401).render("auth/login", {
+            isLogin: false,
+            errorMessage: "Invalid password",
+            user: {}
+        });
+    } 
+    req.session.isLogin = true;   
+    
+    req.session.user = { 
+        _id: user._id.toString(),
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        favorites: user.favorites.map(fav => fav.toString())
+    };
+    // console.log("Session User after login:", req.session.user);
 
-    // ✅ Save in session
-    req.session.user = user;
-    req.session.isLogin = true;
-    await req.session.save();
+    await req.session.save(()=>{
+        console.log("Session saved successfully");
+        res.redirect("/");
+    });
+ 
 
-    res.redirect("/");
+};
 
-}
 
 
 exports.SignAuth = (req, res, next) => {
