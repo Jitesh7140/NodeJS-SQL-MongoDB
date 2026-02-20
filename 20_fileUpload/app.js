@@ -5,7 +5,7 @@ const { error } = require('console');
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session);
 const multer = require('multer');
-const mongo_url = 'mongodb+srv://root:root@newmongodb.mliecuf.mongodb.net/?appName=NewMongoDB';
+const mongo_url = 'data base url';
 
 //local Modules
 const { StoreRoute } = require('./routes/storeRoute')
